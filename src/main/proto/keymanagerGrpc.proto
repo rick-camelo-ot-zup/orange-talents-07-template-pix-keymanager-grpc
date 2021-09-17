@@ -1,0 +1,35 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "br.rcmto";
+option java_outer_classname = "KeymanagerGrpc";
+option objc_class_prefix = "HLW";
+
+package br.rcmto;
+
+service KeymanagerGrpcService {
+  rpc cadastrar (KeymanagerRequest) returns (KeymanagerResponse) {}
+}
+
+enum TipoChave{
+  CPF = 0;
+  TELEFONE_CELULAR = 1;
+  EMAIL=2;
+  CHAVE_ALEATORIA=3;
+
+}
+
+enum TipoConta{
+  CONTA_CORRENTE=0;
+  CONTA_POUPANCA=1;
+}
+
+message KeymanagerRequest {
+  string chave = 1;
+  string identificador = 2;
+  TipoChave tipo = 3;
+  TipoConta conta = 4;
+}
+
+message KeymanagerResponse {
+  string pixID = 1;
+}
