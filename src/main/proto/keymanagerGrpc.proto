@@ -6,16 +6,19 @@ option objc_class_prefix = "HLW";
 
 package br.rcmto;
 
-service KeymanagerGrpcService {
-  rpc cadastrar (KeymanagerRequest) returns (KeymanagerResponse) {}
+service CadastrarChavePixGrpcService {
+  rpc cadastrar (CadastraChavePixRequest) returns (CadastraChavePixResponse) {}
+}
+
+service RemoverChavePixGrpcService {
+  rpc remover (RemoveChavePixRequest) returns (RemoveChavePixResponse) {}
 }
 
 enum TipoChave{
-  CPF = 0;
+  CHAVE_ALEATORIA=0;
   TELEFONE_CELULAR = 1;
   EMAIL=2;
-  CHAVE_ALEATORIA=3;
-
+  CPF = 3;
 }
 
 enum TipoConta{
@@ -23,13 +26,22 @@ enum TipoConta{
   CONTA_POUPANCA=1;
 }
 
-message KeymanagerRequest {
+message CadastraChavePixRequest {
   string chave = 1;
   string identificador = 2;
   TipoChave tipo = 3;
   TipoConta conta = 4;
 }
 
-message KeymanagerResponse {
+message CadastraChavePixResponse {
+  string pixID = 1;
+}
+
+message RemoveChavePixRequest{
+  string pixID = 1;
+  string identificador = 2;
+}
+
+message RemoveChavePixResponse{
   string pixID = 1;
 }

@@ -16,7 +16,7 @@ repositories {
 }
 
 micronaut {
-//    runtime("netty")
+    runtime("netty")
     testRuntime("junit5")
     processing {
         incremental(true)
@@ -40,11 +40,16 @@ dependencies {
     implementation("io.micronaut:micronaut-validation")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.hibernate:hibernate-validator:7.0.1.Final")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut.xml:micronaut-jackson-xml")
+    annotationProcessor "io.micronaut:micronaut-inject-java:${micronautVersion}"
+    compile "io.micronaut:micronaut-aop:${micronautVersion}"
 
     //TEST
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("io.micronaut:micronaut-http-client")
     testImplementation("com.h2database:h2")
+    testImplementation("org.mockito:mockito-core:3.+")
 
 }
 
