@@ -4,7 +4,6 @@ import br.rcmto.CadastraChavePixRequest
 import br.rcmto.TipoChave
 import br.rcmto.exceptions.ConstraintValidationPixException
 
-
 class CadastraChavePixValidator{
     fun validateCadastraChavePixRequest(request: CadastraChavePixRequest){
         if(request.chave.isBlank() || request.chave.isEmpty()){
@@ -30,3 +29,12 @@ class CadastraChavePixValidator{
     }
 }
 
+fun validaFormatoChave(chave: String): Boolean{
+    with(chave){
+        if(validaCpf(chave)) return true
+        if(validaEmail(chave)) return true
+        if(validaCelular(chave)) return true
+        if(validaUUID(chave)) return true
+        return false
+    }
+}

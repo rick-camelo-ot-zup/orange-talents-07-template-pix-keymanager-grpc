@@ -30,7 +30,9 @@ interface BCBClient {
     data class BCBResponse(
         val keyType: KeyType,
         val key: String,
-        val createdAt: String
+        val createdAt: String,
+        val bankAccount: BankAccount,
+        val owner: Owner
     )
 
 }

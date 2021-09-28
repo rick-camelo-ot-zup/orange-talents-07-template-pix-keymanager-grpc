@@ -5,6 +5,7 @@ option java_outer_classname = "KeymanagerGrpc";
 option objc_class_prefix = "HLW";
 
 package br.rcmto;
+import "google/protobuf/timestamp.proto";
 
 service CadastrarChavePixGrpcService {
   rpc cadastrar (CadastraChavePixRequest) returns (CadastraChavePixResponse) {}
@@ -12,6 +13,18 @@ service CadastrarChavePixGrpcService {
 
 service RemoverChavePixGrpcService {
   rpc remover (RemoveChavePixRequest) returns (RemoveChavePixResponse) {}
+}
+
+service ConsultaChaveGrpcService{
+  rpc consultaKeyManager (ConsultaKeyManagerRequest) returns (ConsultaKeyManagerResponse){}
+  rpc consultaChaveExterno (ConsultaChaveExternoRequest) returns (ConsultaChaveExternoResponse){}
+  rpc listaChaves (ListaChavesRequest) returns (ListaChavesResponse){}
+}
+
+message Conta{
+  string instituicao = 1;
+  string numero = 2;
+  TipoConta tipoConta = 3;
 }
 
 enum TipoChave{
@@ -44,4 +57,45 @@ message RemoveChavePixRequest{
 
 message RemoveChavePixResponse{
   string pixID = 1;
+}
+
+message ConsultaKeyManagerRequest {
+  string pixId = 1;
+  string idPortador = 2;
+}
+message ConsultaChaveExternoRequest {
+  string chave = 1;
+}
+message ListaChavesRequest{
+  string idPortador = 1;
+}
+message ListaChavesResponse{
+  repeated Key keys = 1;
+}
+message Key {
+  string idPix = 1;
+  string chave = 2;
+  TipoChave tipoChave = 3;
+  string identificador = 4;
+  TipoConta tipoConta = 5;
+  google.protobuf.Timestamp criadoEm = 6;
+}
+message ConsultaKeyManagerResponse{
+  TipoChave tipoChave = 1;
+  string chave = 2;
+  string nomePortador = 3;
+  string cpfPortador = 4;
+  Conta conta = 5;
+  google.protobuf.Timestamp criadoEm = 6;
+  string identificador = 7;
+  string idPix = 8;
+}
+
+message ConsultaChaveExternoResponse{
+  TipoChave tipoChave = 1;
+  string chave = 2;
+  string nomePortador = 3;
+  string cpfPortador = 4;
+  Conta conta = 5;
+  google.protobuf.Timestamp criadoEm = 6;
 }
